@@ -16,12 +16,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/machines")
 public class MachineController {
 
     // Create a list to simulate a Data Base
     private List<Machine> machines = new ArrayList<>();
+
+    // Initial message
+    @GetMapping("/")
+    public String welcomeString() {
+        return "Hello Spring";
+    }
+    
+    @GetMapping("/status")
+    public String statusApplication() {
+        return "Application Status: running";
+    }
+    
+    @GetMapping("/versao")
+    public String versionApplication() {
+        return "Application V0.0.01";
+    }
 
     // List all machines
     @GetMapping
@@ -41,7 +58,7 @@ public class MachineController {
     }
 
     // Post machine
-    @PostMapping
+    @PostMapping("/register")
     public Machine postMachine(@RequestBody Machine machine){
         machines.add(machine);
 

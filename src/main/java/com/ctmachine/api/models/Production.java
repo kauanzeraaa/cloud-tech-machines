@@ -1,4 +1,4 @@
-package com.ctmachine.models;
+package com.ctmachine.api.models;
 
 import java.util.UUID;
 

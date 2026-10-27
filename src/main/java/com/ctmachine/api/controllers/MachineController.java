@@ -1,4 +1,4 @@
-package com.ctmachine.controllers;
+package com.ctmachine.api.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import java.util.UUID;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ctmachine.models.Machine;
+import com.ctmachine.api.models.Machine;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

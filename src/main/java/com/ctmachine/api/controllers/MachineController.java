@@ -35,7 +35,7 @@ public class MachineController {
         return "Application Status: running";
     }
     
-    @GetMapping("/versao")
+    @GetMapping("/version")
     public String versionApplication() {
         return "Application V0.0.01";
     }
@@ -50,7 +50,7 @@ public class MachineController {
     @GetMapping("/{id}")
     public Machine searchById(@PathVariable UUID id){
         for (Machine machine : machines){
-            if(machine.getId() == id){
+            if(id.equals(machine.getId())){
                 return machine;
             }
         }
@@ -60,6 +60,7 @@ public class MachineController {
     // Post machine
     @PostMapping("/register")
     public Machine postMachine(@RequestBody Machine machine){
+        machine.setId(UUID.randomUUID());
         machines.add(machine);
 
         return machine;
@@ -69,7 +70,7 @@ public class MachineController {
     @PutMapping("/{id}")
     public Machine updatMachine(@PathVariable UUID id, @RequestBody Machine updatedMachine){
         for (Machine machine : machines){
-            if (machine.getId() == id){
+            if (id.equals(machine.getId())){
                 machine.setName(updatedMachine.getName());
                 machine.setType(updatedMachine.getType());
                 machine.setSector(updatedMachine.getSector());
@@ -85,7 +86,7 @@ public class MachineController {
     @DeleteMapping("/{id}")
     public String deleteMachine(@PathVariable UUID id){
         for (Machine machine : machines){
-            if (machine.getId() == id){
+            if (id.equals(machine.getId())){
                 machines.remove(machine);
 
                 return "Machine successfully deleted!";

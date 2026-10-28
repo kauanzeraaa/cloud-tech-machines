@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.http.ResponseEntity;
 
 
 
@@ -41,7 +42,7 @@ public class ProductionController {
     @GetMapping("/{id}") 
     public Production searchById(@PathVariable UUID id){
         for (Production production : productions){
-            if (production.getMachineId() == id){
+            if (id.equals(production.getMachineId())){
                 return production;
             }
         }
@@ -51,17 +52,17 @@ public class ProductionController {
 
     // PUT - update productions
     @PutMapping("/{id}")
-    public Production updateProduction(@PathVariable UUID id, @RequestBody Production updateProduction){
+    public ResponseEntity<Production> updateProduction(@PathVariable UUID id, @RequestBody Production updateProduction){
         for (Production production : productions){
-            if (production.getMachineId() == id){
+            if (id.equals(production.getMachineId())){
                 production.setConsumption(updateProduction.getConsumption());
                 production.setTotalProduction(updateProduction.getTotalProduction());
                 production.setWorkingTime(updateProduction.getWorkingTime());
 
-                return  production;
+                return ResponseEntity.ok(production);
             }
         }
 
-        return null;
+        return ResponseEntity.notFound().build();
     }
 }
